@@ -10,10 +10,7 @@ router.get('/', async (req, res) => {
 
   try {
 
-    /* service.find */
-    const response = service.find()
-
-
+    const response = await service.find()
 
     res.status(200).send(response)
   } catch (error) {

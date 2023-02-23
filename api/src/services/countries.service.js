@@ -12,15 +12,23 @@ class CountryService {
     const countries = await axios.get('https://restcountries.com/v3/all')
 
     const info = countries.data.map((country) => {
+
       return {
         commonName : country.name.common,
         officialName : country.name.official,
-        continent : country.continents
+        continent : country.continents,
+        flag : country.flags[1],
+        code : country.cca3,
+        capital : country.capital, 
+        subregion : country.subregion,
+        extension : country.area,
+        population : country.population,
+
       }
+
     })
 
     const response = info
-    console.log(response)
 
     return response
   }
