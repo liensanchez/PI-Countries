@@ -29,15 +29,20 @@ class CountryService {
     })
 
     for (const country of info) {
+
+      if (!country.hasOwnProperty('capital') || country.capital === null || country.capital === '') {
+        country.capital = 'unknown';
+      }
+
       try {
         const createdCountry = await Country.create(country);
-        console.log('Created country:', createdCountry.toJSON());
       } catch (error) {
         console.error('Error creating country:', error);
       }
+
     }
 
-    const response = info
+    const response = await Country.findAll()
 
     return response
   }
@@ -47,15 +52,3 @@ class CountryService {
 module.exports = CountryService;
 
 
-
-/* 
-            code: country.code,
-            name: country.commonName,
-            officialName: country.officialName,
-            continent: country.continent,
-            flag: country.flag,
-            capital: country.capital,
-            subregion: country.subregion,
-            extension: country.area,
-            population: country.population,
-*/
