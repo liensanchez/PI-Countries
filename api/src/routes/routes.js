@@ -6,7 +6,6 @@ const countriesRoutes = require("./countries.routes")
 const router = Router();
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 router.use('/countries', countriesRoutes )
 
 module.exports = router;
