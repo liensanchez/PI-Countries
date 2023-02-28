@@ -43,26 +43,27 @@ class CountryService {
         info[i].code='NOI'
         countriesComplete.push(info[i])
       } 
-
+      
+      for (let j = 0; j < countriesComplete.length; j++){
+      
+        const country = await Country.create({ 
+          commonName : countriesComplete.commonName,
+          officialName : countriesComplete.officialName,
+          continent : countriesComplete.continent,
+          flag : countriesComplete.flag,
+          code : countriesComplete.code,
+          capital : countriesComplete.capital, 
+          subregion : countriesComplete.subregion,
+          extension : countriesComplete.extension,
+          population : countriesComplete.population,
+        })
+  
+      }
     }
 
-    const create = await Promise.all(countriesComplete.map((country) => {
 
-      return Country.create({
-        code: country.code,
-        name: country.commonName,
-        officialName: country.officialName,
-        continent: country.continent,
-        flag: country.flag,
-        capital: country.capital,
-        subregion: country.subregion,
-        extension: country.area,
-        population: country.population
-      });
-    
-    }));
 
-    const response = await Country.findAll() 
+    const response = await Country.findAll({}) 
 
     return response
   }
@@ -70,3 +71,17 @@ class CountryService {
 }
 
 module.exports = CountryService;
+
+
+
+/* 
+            code: country.code,
+            name: country.commonName,
+            officialName: country.officialName,
+            continent: country.continent,
+            flag: country.flag,
+            capital: country.capital,
+            subregion: country.subregion,
+            extension: country.area,
+            population: country.population,
+*/
