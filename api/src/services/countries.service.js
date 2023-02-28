@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {Country} = require('../db')
 
 class CountryService {
 
@@ -23,12 +24,47 @@ class CountryService {
         subregion : country.subregion,
         extension : country.area,
         population : country.population,
-
       }
-
+ 
     })
 
-    const response = info
+    //checkeamos si estan completos y sino los completamos
+
+    let countriesComplete = []
+
+    for (let i = 0; i < info.length; i++){
+
+      if(info[i].code && info[i].capital){
+        countriesComplete.push(info[i])
+      } else if (!info[i].capital) {
+        info[i].capital= info[i].officialName
+        countriesComplete.push(info[i])
+      } else if (!info[i].code) {
+        info[i].code='NOI'
+        countriesComplete.push(info[i])
+      } 
+
+    }
+
+    console.log(countriesComplete)
+
+/*     countriesComplete.forEach(async(country) => {
+
+      await Country.create({
+        code: country.code,
+        name: country.commonName,
+        officialName: country.officialName,
+        continent: country.continent,
+        flag: country.flag,
+        capital: country.capital,
+        subregion: country.subregion,
+        extension : country.area,
+        population : country.population
+      })
+
+    })   */
+
+    const response = countriesComplete
 
     return response
   }
