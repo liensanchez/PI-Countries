@@ -46,23 +46,37 @@ class CountryService {
 
     }
 
-    console.log(countriesComplete)
+    for (let i = 0; i > countriesComplete.length; i++){
+
+      await countries.create({
+        code: countriesComplete[i].code,
+        name: countriesComplete[i].commonName,
+        officialName: countriesComplete[i].officialName,
+        continent: countriesComplete[i].continent,
+        flag: countriesComplete[i].flag,
+        capital: countriesComplete[i].capital,
+        subregion: countriesComplete[i].subregion,
+        extension : countriesComplete[i].area,
+        population : countriesComplete[i].population
+      })
+
+    }
 
 /*     countriesComplete.forEach(async(country) => {
 
-      await Country.create({
-        code: country.code,
-        name: country.commonName,
-        officialName: country.officialName,
-        continent: country.continent,
-        flag: country.flag,
-        capital: country.capital,
-        subregion: country.subregion,
-        extension : country.area,
-        population : country.population
-      })
+        await Country.create({
+          code: country.code,
+          name: country.commonName,
+          officialName: country.officialName,
+          continent: country.continent,
+          flag: country.flag,
+          capital: country.capital,
+          subregion: country.subregion,
+          extension : country.area,
+          population : country.population
+        })
 
-    })   */
+    })    */
 
     const response = countriesComplete
 
