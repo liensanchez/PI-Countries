@@ -62,7 +62,9 @@ class CountryService {
     
     }));
 
-    return countriesComplete
+    const response = await Country.findAll() 
+
+    return response
   }
 
 }
