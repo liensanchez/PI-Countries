@@ -4,6 +4,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false
+    },
     code: {
       type: DataTypes.STRING,
       allowNull: false
@@ -40,11 +45,4 @@ module.exports = (sequelize) => {
 
   });
 
-/*     // define association between Activity and Country
-    Activity.associate = function(models) {
-      Activity.belongsTo(models.Country, {
-        foreignKey: 'countryId',
-        onDelete: 'CASCADE'
-      });
-    }; */
 };
