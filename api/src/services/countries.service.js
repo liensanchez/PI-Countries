@@ -1,4 +1,5 @@
-const axios = require('axios');
+const axios = require('axios')
+const { Op } = require('sequelize')
 const {Country} = require('../db')
 
 class CountryService {
@@ -7,19 +8,24 @@ class CountryService {
 
   }
 
-  /* All countries */
-  async find () {
+  /* Get all countries || Get countries by name */
+  async get (query) {
+    const options = {
+
+    };
+
+    options.where = {}
 
     const countries = await axios.get('https://restcountries.com/v3/all')
 
     const info = countries.data.map((country) => {
 
       return {
-        commonName : country.name.common,
+        code : country.cca3,
+        name : country.name.common,
         officialName : country.name.official,
         continent : country.continents,
         flag : country.flags[1],
-        code : country.cca3,
         capital : country.capital, 
         subregion : country.subregion,
         extension : country.area,
@@ -28,47 +34,46 @@ class CountryService {
  
     })
 
-    //checkeamos si estan completos y sino los completamos
+    for (const country of info) {
 
-    let countriesComplete = []
+      if (!country.hasOwnProperty('capital') || country.capital === null || country.capital === '') {
+        country.capital = 'unknown';
+      }
 
-    for (let i = 0; i < info.length; i++){
-
-      if(info[i].code && info[i].capital){
-        countriesComplete.push(info[i])
-      } else if (!info[i].capital) {
-        info[i].capital= info[i].officialName
-        countriesComplete.push(info[i])
-      } else if (!info[i].code) {
-        info[i].code='NOI'
-        countriesComplete.push(info[i])
-      } 
+      try {
+        const createdCountry = await Country.create(country);
+      } catch (error) {
+        console.error('Error creating country:', error);
+      }
 
     }
 
-    console.log(countriesComplete)
+    if (query.name) {
+      options.where.officialName = { [Op.iLike]: `%${query.name}%` }
+    }
 
-/*     countriesComplete.forEach(async(country) => {
 
-      await Country.create({
-        code: country.code,
-        name: country.commonName,
-        officialName: country.officialName,
-        continent: country.continent,
-        flag: country.flag,
-        capital: country.capital,
-        subregion: country.subregion,
-        extension : country.area,
-        population : country.population
-      })
+    const response = await Country.findAll(options)
 
-    })   */
+    return {response}
+  }
 
-    const response = countriesComplete
+  /* get country by id */
+  async getCountry (countryID) {
 
-    return response
+    const response = await Country.findOne({
+      where: {
+        id: {
+          [Op.eq]: countryID
+        }
+      }
+    })
+
+    return {response}
   }
 
 }
 
 module.exports = CountryService;
+
+
