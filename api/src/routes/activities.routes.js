@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const ActivityService = require('../services/countries.service')
+const ActivityService = require('../services/activities.service')
 
 const router = Router();
 const service = new ActivityService()
@@ -8,9 +8,11 @@ router.post('/', async (req, res) => {
 
   try {
 
-    const response = await service.get(req.query)
+    const body = req.body
 
-    res.json(response)
+    const cretedActivity = await service.create(body)
+
+    res.json(cretedActivity)
   } catch (error) {
     res.status(404).json({error: error.message})
   }

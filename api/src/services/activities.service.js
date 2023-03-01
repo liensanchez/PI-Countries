@@ -1,5 +1,3 @@
-const axios = require('axios')
-const { Op } = require('sequelize')
 const {Activity} = require('../db')
 
 class ActivityService {
@@ -8,8 +6,18 @@ class ActivityService {
 
   }
 
-  async create () {
+  async create ({id, name, difficulty, duration, country, season}) {
 
+    const creation = await Activity.create({
+      id: id,
+      name: name,
+      difficulty: difficulty,
+      duration: duration,
+      country: country,
+      season: season
+    })
+
+    return { creation }
   }
   
 }

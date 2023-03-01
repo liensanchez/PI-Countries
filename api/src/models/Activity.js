@@ -17,7 +17,10 @@ module.exports = (sequelize) => {
       defaultValue: 1,
     },
     duration:{
-      type: DataTypes.DATEONLY,
+      type: DataTypes.STRING,
+    },
+    country:{
+      type: DataTypes.STRING,
     },
     season: {
       type: DataTypes.STRING(25),
