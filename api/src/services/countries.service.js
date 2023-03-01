@@ -1,4 +1,5 @@
-const axios = require('axios');
+const axios = require('axios')
+const { Op } = require('sequelize')
 const {Country} = require('../db')
 
 class CountryService {
@@ -8,7 +9,7 @@ class CountryService {
   }
 
   /* All countries */
-  async find () {
+  async getAll () {
 
     const countries = await axios.get('https://restcountries.com/v3/all')
 
@@ -44,7 +45,20 @@ class CountryService {
 
     const response = await Country.findAll()
 
-    return response
+    return {response}
+  }
+
+  async getCountry (countryID) {
+
+    const response = await Country.findOne({
+      where: {
+        id: {
+          [Op.eq]: countryID
+        }
+      }
+    })
+
+    return {response}
   }
 
 }
