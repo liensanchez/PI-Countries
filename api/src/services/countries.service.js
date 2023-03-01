@@ -8,8 +8,13 @@ class CountryService {
 
   }
 
-  /* All countries */
-  async getAll () {
+  /* Get all countries || Get countries by name */
+  async get (query) {
+    const options = {
+
+    };
+
+    options.where = {}
 
     const countries = await axios.get('https://restcountries.com/v3/all')
 
@@ -43,11 +48,17 @@ class CountryService {
 
     }
 
-    const response = await Country.findAll()
+    if (query.name) {
+      options.where.officialName = { [Op.iLike]: `%${query.name}%` }
+    }
+
+
+    const response = await Country.findAll(options)
 
     return {response}
   }
 
+  /* get country by id */
   async getCountry (countryID) {
 
     const response = await Country.findOne({

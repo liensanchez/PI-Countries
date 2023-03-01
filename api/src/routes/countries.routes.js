@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 
   try {
 
-    const response = await service.getAll()
+    const response = await service.get(req.query)
 
     res.json(response)
   } catch (error) {
@@ -32,4 +32,7 @@ router.get('/:countryID', async (req, res) => {
     res.status(404).json({error: error.message})
   }
 })
+
+
+
 module.exports = router;
