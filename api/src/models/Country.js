@@ -39,4 +39,12 @@ module.exports = (sequelize) => {
     }
 
   });
+
+/*     // define association between Activity and Country
+    Activity.associate = function(models) {
+      Activity.belongsTo(models.Country, {
+        foreignKey: 'countryId',
+        onDelete: 'CASCADE'
+      });
+    }; */
 };

@@ -19,14 +19,23 @@ module.exports = (sequelize) => {
     duration:{
       type: DataTypes.STRING,
     },
-    country:{
+/*     country:{
       type: DataTypes.STRING,
-    },
+    }, */
     season: {
       type: DataTypes.STRING(25),
       validate: {
         isIn: [['Winter', 'Summer',  'Autumn', 'Spring']]
       }
+    },
+    countryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Country',
+        key: 'id'
+      }
     }
   });
+
+
 }

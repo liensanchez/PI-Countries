@@ -53,7 +53,9 @@ class CountryService {
     }
 
 
-    const response = await Country.findAll(options)
+    const response = await Country.findAll(options, {include: Activity})
+
+    console.log(response.lenght)
 
     return {response}
   }
