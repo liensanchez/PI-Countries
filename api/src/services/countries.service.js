@@ -56,10 +56,8 @@ class CountryService {
 
     const response = await Country.findAll(options)
 
-/*     const activitie = await Activity.findOne({where: }) */
 
-
-    return {response/* , activitie */}
+    return {response}
   }
 
   /* get country by id */
