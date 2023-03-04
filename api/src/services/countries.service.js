@@ -1,6 +1,7 @@
 const axios = require('axios')
 const { Op } = require('sequelize')
 const {Country} = require('../db')
+const {Activity} = require('../db')
 
 class CountryService {
 
@@ -53,11 +54,12 @@ class CountryService {
     }
 
 
-    const response = await Country.findAll(options, {include: Activity})
+    const response = await Country.findAll(options)
 
-    console.log(response.lenght)
+/*     const activitie = await Activity.findOne({where: }) */
 
-    return {response}
+
+    return {response/* , activitie */}
   }
 
   /* get country by id */
@@ -68,6 +70,10 @@ class CountryService {
         id: {
           [Op.eq]: countryID
         }
+      },
+      include: {
+        model: Activity,
+        attributes: ['id', 'name', 'difficulty', 'duration', 'season']
       }
     })
 

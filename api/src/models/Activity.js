@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
       allowNull: false
     },
     name: {
@@ -16,25 +17,16 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
-    duration:{
+    duration: {
       type: DataTypes.STRING,
     },
-/*     country:{
-      type: DataTypes.STRING,
-    }, */
     season: {
       type: DataTypes.STRING(25),
       validate: {
         isIn: [['Winter', 'Summer',  'Autumn', 'Spring']]
       }
-    },
-    countryId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'country',
-        key: 'id'
-      }
     }
+
   });
 
 

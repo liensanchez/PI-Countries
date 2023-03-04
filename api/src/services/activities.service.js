@@ -6,14 +6,13 @@ class ActivityService {
 
   }
 
-  async create ({id, name, difficulty, duration, country, season}) {
+  async create ({name, difficulty, duration, country_code, season}) {
 
     const creation = await Activity.create({
-      id: id,
       name: name,
       difficulty: difficulty,
       duration: duration,
-      country: country,
+      country_code: country_code,
       season: season
     })
 
