@@ -97,8 +97,8 @@ __IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estil
 
 - [ ] React
 - [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
+- [X] Express
+- [X] Sequelize - Postgres
 
 ## Frontend
 
@@ -146,7 +146,7 @@ __Ruta de creación de actividad turística__: debe contener
 
 El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
 
-- [x] País con las siguientes propiedades:
+- [X] País con las siguientes propiedades:
   - ID (Código de 3 letras) *
   - Nombre *
   - Imagen de la bandera *
@@ -155,7 +155,7 @@ El modelo de la base de datos deberá tener las siguientes entidades (Aquellas p
   - Subregión
   - Área
   - Población
-- [x] Actividad Turística con las siguientes propiedades:
+- [X] Actividad Turística con las siguientes propiedades:
   - ID
   - Nombre
   - Dificultad (Entre 1 y 5)
@@ -177,10 +177,10 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
   - Obtener el detalle de un país en particular
   - Debe traer solo los datos pedidos en la ruta de detalle de país
   - Incluir los datos de las actividades turísticas correspondientes
-- [x] __GET /countries?name="..."__:
+- [X] __GET /countries?name="..."__:
   - Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
   - Si no existe ningún país mostrar un mensaje adecuado
-- [x] __POST /activities__:
+- [X] __POST /activities__:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
   - Crea una actividad turística en la base de datos, relacionada con los países correspondientes
 

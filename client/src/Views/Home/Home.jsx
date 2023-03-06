@@ -1,12 +1,25 @@
 import React from 'react'
-import ButtonIndex from '../../Logic/HomeLogic/ButtonIndex'
+import { useNavigate } from 'react-router-dom'
+
 
 function Home() {
+
+  const navigate = useNavigate()
+
+  function goIndex () {
+
+    navigate('/index')
+  }
+
   return (
     <>
     <div>img container</div>
     
-    <ButtonIndex/>
+    <button
+      onClick={() => goIndex()}
+    > Index
+    </button>
+
     </>
   )
 }

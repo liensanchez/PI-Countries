@@ -7,7 +7,7 @@ function Router() {
   return (
     <Routes>
       <Route
-        path="/home"
+        path="/"
         element={<Home />} />
       <Route
         path="/index"

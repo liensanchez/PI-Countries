@@ -1,4 +1,5 @@
 const {Activity} = require('../db')
+const {Country} = require('../db')
 
 class ActivityService {
 
@@ -8,6 +9,10 @@ class ActivityService {
 
   async create ({name, difficulty, duration, country_code, season}) {
 
+    const country = await Country.findByPk(
+      country_code
+    )
+
     const creation = await Activity.create({
       name: name,
       difficulty: difficulty,
@@ -16,7 +21,9 @@ class ActivityService {
       season: season
     })
 
-    return { creation }
+    await country.addActivity(creation) 
+
+    return { creation, country }
   }
   
 }
